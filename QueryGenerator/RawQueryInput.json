@@ -1,0 +1,20 @@
+{
+  "columns": [
+    {
+      "operator": "IN",
+      "fieldName": "column1",
+      "fieldValue": "value1;value2;value3"
+    },
+    {
+      "operator": "Equal",
+      "fieldName": "column2",
+      "fieldValue": "value"
+    },
+    {
+      "operator": "Between",
+      "fieldName": "column3",
+      "fieldValue": "value1;value2"
+    }
+  ],
+  "Name": "table1"
+}
