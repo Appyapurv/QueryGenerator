@@ -18,10 +18,13 @@ namespace QueryGenerator
             string inputJson = FileProcess.ReadFile("RawQueryInput.json");
             var inputModel = JsonConvert.DeserializeObject<Table>(inputJson);
             var query = new QueryGenerator();
-            var generatedQuery = query.GenerateQuery(inputModel);
+            var generatedQuery = query.GenerateQuery(inputModel,"*");
             Console.WriteLine("*************************Query With Operators*************");
             Console.WriteLine(generatedQuery);
-            Console.ReadLine();
+            var subQuery = query.GenerateSubQueryQuery(inputModel);
+            Console.WriteLine("*************************SubQuery Query*************");
+            Console.WriteLine(subQuery);
+            //Console.ReadLine();
 
             // Read Join Query
             string inputJoinJson = FileProcess.ReadFile("RawQueryWithJoins.json");
@@ -30,6 +33,8 @@ namespace QueryGenerator
             Console.WriteLine("*************************Query With Operators and Joins*************");
             Console.WriteLine(generatedJoinQuery);
             Console.ReadLine();
+
+            
         }
 
         

@@ -14,6 +14,7 @@ namespace QueryGenerator
     {
         public string GenerateQuery(Column queryVariable)
         {
+            
             return $"{queryVariable.FieldName} = {queryVariable.FieldValue}";
         }
     }

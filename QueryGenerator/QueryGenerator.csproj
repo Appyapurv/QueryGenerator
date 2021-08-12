@@ -62,9 +62,11 @@
     <Compile Include="QueryGenerator.cs" />
     <Compile Include="QueryOperator\FilterBetween.cs" />
     <Compile Include="QueryOperator\FilterEqual.cs" />
+    <Compile Include="QueryOperator\FilterGreaterThan.cs" />
     <Compile Include="QueryOperator\FilterIN.cs" />
     <Compile Include="QueryOperator\Filter.cs" />
     <Compile Include="JoinOperator\JoinQuery.cs" />
+    <Compile Include="QueryOperator\FilterSubQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

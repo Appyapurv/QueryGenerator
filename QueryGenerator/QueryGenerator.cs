@@ -10,12 +10,18 @@ namespace QueryGenerator
 {
     public class QueryGenerator
     {
-        public string GenerateQuery(Table input)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="columnNameToSelect">Pass Individual Column Name or "*" to select all</param>
+        /// <returns></returns>
+        public string GenerateQuery(Table input, string columnNameToSelect)
         {
-            StringBuilder query = new StringBuilder("select * from ");
+            StringBuilder query = new StringBuilder("select " + columnNameToSelect + " from ");
 
             query.Append(input.TableName + " Where ");
-            for(int i = 0; i < input.Columns.Count(); i++)
+            for (int i = 0; i < input.Columns.Count(); i++)
             {
                 var queryFilter = input.Columns[i];
                 var operatorFactory = new FilterFactory();
@@ -25,8 +31,10 @@ namespace QueryGenerator
 
                 query.Append(generatedQuery);
                 if (i < input.Columns.Count - 1)
-                    query.Append(" AND ");
-               
+                {
+                    var exptoAppend = queryFilter.Logicalexpression != string.Empty ? queryFilter.Logicalexpression : "";
+                    query.Append(" " + exptoAppend + " ");
+                }
 
             }
             return query.ToString();
@@ -37,13 +45,25 @@ namespace QueryGenerator
             StringBuilder query = new StringBuilder("select * from ");
 
             query.Append(input.PrimaryTable.TableName);
-            for(int j = 0; j < input.Joins.Count(); j++)
+            for (int j = 0; j < input.Joins.Count(); j++)
             {
                 var joinFactory = new JoinFactory();
                 var joinType = joinFactory.GenerateJoinQuery(input.Joins[j].Type);
                 var joinQuery = joinType.GenerateJoinQuery(input.Joins[j], input.PrimaryTable.TableName);
                 query.Append(joinQuery);
-            }            
+            }
+            return query.ToString();
+        }
+
+        public string GenerateSubQueryQuery(Table input)
+        {
+            StringBuilder query = new StringBuilder("select * from ");
+
+            query.Append(input.TableName + " Where " + input.SubQueryColumnFilterBy
+                + " IN (");
+            var generatedQuery = this.GenerateQuery(input, input.SubQueryColumnFilterBy);
+
+            query.Append(generatedQuery + ")");
             return query.ToString();
         }
     }

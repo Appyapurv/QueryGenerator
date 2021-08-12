@@ -24,6 +24,10 @@ namespace QueryGenerator.QueryFactory
             {
                 return new FilterBetween();
             }
+            else if(string.Equals(operatorType, "greaterThan", StringComparison.OrdinalIgnoreCase))
+            {
+                return new FilterGreaterThan();
+            }
             return null;
         }
     }

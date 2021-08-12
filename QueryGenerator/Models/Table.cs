@@ -10,5 +10,7 @@ namespace QueryGenerator.Models
     {
         public List<Column> Columns { get; set; }
         public string TableName { get; set; }
+
+        public string SubQueryColumnFilterBy { get; set; }
     }
 }

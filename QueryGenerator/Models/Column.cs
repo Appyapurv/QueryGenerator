@@ -11,5 +11,6 @@ namespace QueryGenerator.Models
         public string Operator { get; set; }
         public string FieldName { get; set; }
         public string FieldValue { get; set; }
+        public string Logicalexpression { get; set; }
     }
 }
